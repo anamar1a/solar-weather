@@ -1,0 +1,2 @@
+### sunspots time series plot as an example for the X-ray flux time series data
+plot(sunspots)
