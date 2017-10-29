@@ -1,0 +1,12 @@
+png("MagnetoMinMax.png")
+newdata<-resizePixels(mydata, pix, pix)
+mydata<-as.matrix(newdata)
+mydata[mydata< -500]<- -500
+mydata[mydata>500]<-500
+image(c(1:pix), c(1:pix), apply(t(newdata), 2, rev), col = gray.colors(256),  zlim =c(-500, 500), asp=1)
+par(new=T)
+dev.off()
+rad<-mean(sqrt((mydiffnet1$Var1-pix/2)^2 + (mydiffnet1$Var2-pix/2)^2))
+trimmedcircle1<-diffnet1[which(sqrt((diffnet1$Var1-pix/2)^2 + (diffnet1$Var2-pix/2)^2)< rad),]
+plot(trimmedcircle1$Var2, trimmedcircle1$Var1, pch=ifelse(trimmedcircle1$value>0, 3, 4), col = ifelse(trimmedcircle1$value>0, rgb(0,0,1, alpha=.1), rgb(0, 1, 0, alpha=.1)), asp = 1, xlim = rev(c(1, pix)), ylim=c(1, pix), xaxt = "n", yaxt = "n", xlab="", ylab="")
+dev.off()
